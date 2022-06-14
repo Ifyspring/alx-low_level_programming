@@ -1,4 +1,3 @@
-nes(18 sloc) 309 Bytes
 #include "main.h"
 
 /**
@@ -18,5 +17,5 @@ for (i = 0; i < x; i += 2)
 	{
 	_putchar(str[i]);
 	}
-	putchar('\n');
+	_putchar('\n');
 }
