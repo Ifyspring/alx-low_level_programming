@@ -1,1 +1,1 @@
-Task on static library
+Task on static libraries
