@@ -1,46 +1,39 @@
 #include <stdlib.h>
+#include <stdlib.h>
+
 /**
- * argstostr - concantenate all the argument of a program
- * @ac: argument count
- * @av: argument  values
- * Description: return the required result
- * Return: return char pointer
+ * argstostr - Concatenates all the arguments
+ * @ac: allocated memory space
+ * @av: 2D array
+ * Return: array
  */
 char *argstostr(int ac, char **av)
 {
-	int i, j, k, count = 0;
-	char *ptr;
+	char *new_str;
+	int len = 0, i = 0, j, k = 0;
 
-	if (ac == 0 || av == NULL)
+	if (ac <= 0 || av == NULL)
 	return (NULL);
-/**
-* count the number of char in each string of argument
-* pass to the program
-*/
+	for (; i < ac; i++)
+	{
+	for (j = 0; av[i][j]; j++)
+	len++;
+	len++;
+	}
+	len++;
+	new_str = malloc(len * sizeof(char));
+	if (new_str == NULL)
+	return (NULL);
 	for (i = 0; i < ac; i++)
 	{
-	for (j = 0; av[i][j] != '\0'; j++)
-	count++;
-	count++;
-	}
-	count++;
-/**
-* Allocating memory for the total number of char
-* and new line for each words
-*/
-	ptr = (char *)malloc(count * sizeof(char));
-	if (ptr == NULL)
-	return (NULL);
-	k = 0;
-	i = 0;
-	for ( ; i < ac; i++)
+	for (j = 0; av[i][j]; j++)
 	{
-	for (j = 0; av[i][j] != '\0'; j++)
-	{
-	ptr[k++] = av[i][j];
+	new_str[k] = av[i][j];
+	k++;
 	}
-	ptr[k++] = '\n';
+	new_str[k] = '\n';
+	k++;
 	}
-	ptr[k] = '\0';
-	return (ptr);
+	new_str[k] = '\0';
+	return (new_str);
 }
