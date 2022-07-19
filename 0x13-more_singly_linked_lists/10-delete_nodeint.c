@@ -1,43 +1,35 @@
-#include <stdlib.h>
 #include "lists.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 /**
- * insert_nodeint_at_index - inserts a new node at a given position.
- * @head: head of linked list
- * @idx: index to insert the node
- * @n: new node data
- * Return: new node
+ * delete_nodeint_at_index - deletes the node at index
+ * @head: head of the list
+ * @index: emplacement of the node to delet
+ * Return: pointr to head of list
  */
-listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
+int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
-	listint_t *current;
-	listint_t *new;
+	unsigned int i;
+	listint_t *current, *next;
 
-	if (head == NULL)
-	return (0);
-	new = malloc(sizeof(listint_t));
-	if (!new)
-	return (0);
-	new->next = NULL;
-	new->n = n;
-	if (idx == 0)
+	if (head == NULL || *head == NULL)
+	return (-1);
+	if (index == 0)
 	{
-	new->next = *head;
-	(*head) = new;
-	return (new);
+	next = (*head)->next;
+	free(*head);
+	*head = next;
+	return (1);
 	}
 	current = *head;
-	while (idx != 1)
+	for (i = 0; i < index - 1; i++)
 	{
+	if (current->next == NULL)
+	return (-1);
 	current = current->next;
-	--idx;
-	if (current == NULL)
-	{
-	free(new);
-	return (NULL);
 	}
-	}
-	new->next = current->next;
-	current->next = new;
-	return (new);
+	next = current->next;
+	current->next = next->next;
+	free(next);
+	return (1);
 }
